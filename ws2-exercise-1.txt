@@ -1,0 +1,24 @@
+Which Account owns the most Address Books?
+Which Address Book contains the most Entries?
+
+
+
+SELECT Account.id, AddressBook.name, COUNT(AddressBook.name) AS total FROM Account
+INNER JOIN AddressBook ON Account.id = AddressBook.accountId
+GROUP BY AddressBook.name ORDER BY total DESC LIMIT 1;
+
++----+----------------+-------+
+| id | name           | total |
++----+----------------+-------+
+|  1 | Vel Foundation |     3 |
++----+----------------+-------+
+
+SELECT AddressBook.id, AddressBook.name, COUNT(Entry.addressBookId) AS total FROM AddressBook
+INNER JOIN Entry ON AddressBook.id = Entry.addressBookId
+GROUP BY Entry.addressBookId ORDER BY total DESC LIMIT 1;
+
++----+-----------------------+-------+
+| id | name                  | total |
++----+-----------------------+-------+
+| 37 | Eu Augue Incorporated |    52 |
++----+-----------------------+-------+
