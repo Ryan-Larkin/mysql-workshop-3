@@ -1,0 +1,27 @@
+How many Address Book Entries have phones starting with area code 3XX?
+How many Address Book Entries have home phones not containing the digit 5?
+How many Address Book Entries are work phones starting with a country code?
+
+SELECT AddressBook.name, Entry.contentLineOne, COUNT(Entry.addressBookId) AS total FROM AddressBook
+INNER JOIN Entry ON AddressBook.id = Entry.addressBookId
+WHERE Entry.subtype = 'phone' AND 
+(Entry.contentLineOne LIKE '_3%' OR Entry.contentLineOne LIKE '1_3%')
+GROUP BY AddressBook.name ORDER BY total DESC;
+
+// List of all entries here
+43 rows in set (0.00 sec)
+
+// Without GROUP BY statement, it says there are 60 total.
+
+
+SELECT AddressBook.name, Entry.type, Entry.subtype, Entry.contentLineOne, COUNT(Entry.addressBookId) AS total FROM AddressBook
+INNER JOIN Entry ON AddressBook.id = Entry.addressBookId
+WHERE Entry.type = 'home' AND
+      Entry.subtype = 'phone' AND 
+      Entry.contentLineOne NOT LIKE '%5%'
+GROUP BY AddressBook.name ORDER BY total DESC;
+
+// List of all entries here
+50 rows in set (0.01 sec)
+
+// Without GROUP BY statement, it says there are 76 total.
