@@ -1,0 +1,28 @@
+List all possible domain name values for ElectronicMail (email@domain.name)
+
+SELECT SUBSTRING_INDEX(content, '@', -1) AS Domain
+FROM ElectronicMail
+GROUP BY Domain ORDER BY Domain DESC;
+
+// "email@domain.name"
+// Split 'content' at '@'. -> ["email", "domain.name"]
+// Pick first element from right (index -1). -> "domain.name"
+// Result: "domain.name"
+
+| acarcu.org                        |
+| ac.org                            |
+| ac.net                            |
+| ac.edu                            |
+| ac.com                            |
+| ac.co.uk                          |
+| aarcuSed.org                      |
+| aaliquetvel.edu                   |
+| aaliquet.com                      |
+| a.net                             |
+| a.edu                             |
+| a.com                             |
+| a.co.uk                           |
+| a.ca                              |
++-----------------------------------+
+
+// 1983 rows in total so here are just the end examples
