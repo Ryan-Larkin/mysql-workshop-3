@@ -8,6 +8,17 @@ ORDER BY country;
 // Not sure why the cities and countries don't match up. I checked the IDs 
 // and the entries just seem to have mismatched data
 
+// ************** TEST SEARCH ************** //
+mysql> select * from Address where city = 'Toronto';
++-----+---------+------+-----------------------------+--------------+---------+----------+------------+------------+
+| id  | entryId | type | addressLine1                | addressLine2 | city    | province | country    | postalCode |
++-----+---------+------+-----------------------------+--------------+---------+----------+------------+------------+
+| 763 |    2056 | home | P.O. Box 763, 9734 Erat Rd. | NULL         | Toronto | Ontario  | Montenegro | 75732-382  |
++-----+---------+------+-----------------------------+--------------+---------+----------+------------+------------+
+// Why does it says Toronto is in Montenegro?
+// ************** TEST SEARCH ************** //
+
+
 +-------------+----------------+
 | country     | city           |
 +-------------+----------------+
