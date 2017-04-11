@@ -1,0 +1,51 @@
+List all of the emails associated to AddressBook.id = 100
+
+
+SELECT a.id AS AddressBookId, e.id AS EntryId, e.type, em.id AS EmailId, em.content FROM AddressBook a
+INNER JOIN Entry e ON a.id = e.addressBookId
+INNER JOIN ElectronicMail em ON e.id = em.entryId
+WHERE a.id = 100;
+
++---------------+---------+-----------------+---------+--------------------------------------------+
+| AddressBookId | EntryId | type            | EmailId | content                                    |
++---------------+---------+-----------------+---------+--------------------------------------------+
+|           100 |    4897 | electronic-mail |     201 | tortor.dictum@Nulla.org                    |
+|           100 |    4486 | electronic-mail |     248 | malesuada.fames.ac@Sedeu.co.uk             |
+|           100 |    4060 | electronic-mail |     656 | velit@vestibulum.co.uk                     |
+|           100 |    4060 | electronic-mail |     944 | tincidunt.congue.turpis@Inmi.net           |
+|           100 |    4030 | electronic-mail |    1094 | vitae.diam@sapienAeneanmassa.com           |
+|           100 |    5243 | electronic-mail |    1155 | Nunc.ac@parturientmontesnascetur.com       |
+|           100 |    4030 | electronic-mail |    1329 | cursus.vestibulum@pellentesqueSeddictum.ca |
+|           100 |    4392 | electronic-mail |    1494 | nibh.Donec.est@nibh.org                    |
+|           100 |    5775 | electronic-mail |    1513 | eu.tellus@ipsum.co.uk                      |
+|           100 |    5466 | electronic-mail |    1516 | massa.Quisque.porttitor@enimSednulla.edu   |
+|           100 |    4897 | electronic-mail |    1663 | mauris.blandit.mattis@Integersemelit.net   |
+|           100 |    5593 | electronic-mail |    1720 | eget@viverraMaecenasiaculis.net            |
+|           100 |    5243 | electronic-mail |    1823 | vulputate.posuere.vulputate@liberoDonec.ca |
+|           100 |    4019 | electronic-mail |    1924 | Nam.tempor@nisimagna.co.uk                 |
++---------------+---------+-----------------+---------+--------------------------------------------+
+
+// The above output is the most in line with what the question is asking. There are entries that don't have an
+// actual email associated with them, instead having a NULL value, so we don't want those.
+
+
+
+// The below statements are all statements I tried, but finally settled on the above as the most full-proof method
+// the also displays all relevant information
+
+SELECT e.id AS EntryId, e.type, em.id AS EmailId, em.content FROM Entry e
+INNER JOIN ElectronicMail em ON e.id = em.entryId
+WHERE e.addressBookId = 100;
+
+OR
+
+SELECT a.id AS AddressBookId, e.id AS EntryId, e.type FROM AddressBook a
+INNER JOIN Entry e ON a.id = e.addressBookId
+WHERE a.id = 100 AND e.type='electronic-mail';
+
+OR 
+
+SELECT a.id AS AddressBookId, e.id AS EntryId, e.type, em.id AS EmailId, em.content FROM AddressBook a
+INNER JOIN Entry e ON a.id = e.addressBookId
+INNER JOIN ElectronicMail em ON e.id = em.entryId
+WHERE e.type ="electronic-mail" AND e.addressBookId = 100;
