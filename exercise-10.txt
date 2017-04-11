@@ -1,0 +1,30 @@
+Transform all work emails into home emails and vice versa. BE CAREFUL ;)
+
+SELECT * FROM ElectronicMail LIMIT 5;
+
++----+---------+------+-------------------------------------------+
+| id | entryId | type | content                                   |
++----+---------+------+-------------------------------------------+
+|  1 |    5465 | home | lorem.fringilla.ornare@dictumplacerat.com |
+|  2 |    4453 | home | diam.Duis@magnaetipsum.org                |
+|  3 |    4949 | home | sit.amet@loremutaliquam.com               |
+|  4 |    5942 | home | massa@semperdui.com                       |
+|  5 |    4973 | home | Cum.sociis@risusNuncac.ca                 |
++----+---------+------+-------------------------------------------+
+
+UPDATE ElectronicMail
+SET type = CASE WHEN type='home' THEN 'work'
+                WHEN type='work' THEN 'home' END
+WHERE type in ('home', 'work');
+
+SELECT * FROM ElectronicMail LIMIT 5;
+
++----+---------+------+-------------------------------------------+
+| id | entryId | type | content                                   |
++----+---------+------+-------------------------------------------+
+|  1 |    5465 | work | lorem.fringilla.ornare@dictumplacerat.com |
+|  2 |    4453 | work | diam.Duis@magnaetipsum.org                |
+|  3 |    4949 | work | sit.amet@loremutaliquam.com               |
+|  4 |    5942 | work | massa@semperdui.com                       |
+|  5 |    4973 | work | Cum.sociis@risusNuncac.ca                 |
++----+---------+------+-------------------------------------------+
