@@ -10,7 +10,12 @@ We then killed the mysqld process, which is the mysql server daemon program, whi
 
 We are now unable to start mysql because we dropped the default table and killed the server process.
 
-To get it all back, we need to start the mysqld process again, and then recreate the default database with 
-mysqld --initialize
+To get it all back, we need to reinstall the mysql database as root, with the command 
+sudo mysql_install_db
 
-We can then use mysql-ctl start as normal
+then we log back in as root
+sudo mysql-ctl start
+
+then we can use
+mysql -uroot
+as normal
